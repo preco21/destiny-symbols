@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+*.log
+
+.env
+
+/src/.next
+/dist
+
+/resources/fonts
+/resources/fonts-export
