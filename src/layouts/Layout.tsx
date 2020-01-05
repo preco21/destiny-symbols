@@ -1,9 +1,12 @@
 import '../styles/style.css'
+import '@blueprintjs/core/lib/css/blueprint.css'
+import { FocusStyleManager } from '@blueprintjs/core'
 import { NextSeo } from 'next-seo'
 import Head from 'next/head'
 import React from 'react'
 import * as PropTypes from 'prop-types'
-// import iconImage from '../images/icon.png'
+
+FocusStyleManager.onlyShowFocusOnTabs()
 
 export function Layout({ children, title }: any) {
   return (
@@ -11,8 +14,6 @@ export function Layout({ children, title }: any) {
       <Head>
         <title>{title}</title>
         <meta name="theme-color" content="#daedae" />
-        {/* <link rel="icon" sizes="192x192" href={iconImage} /> */}
-        {/* <link rel="apple-touch-icon" href={iconImage} /> */}
       </Head>
       <NextSeo
         title="Destiny 2 Symbols"
