@@ -16,7 +16,8 @@
     "build:prepare": "next build src",
     "build:export": "next export --outdir dist src",
     "clean": "rm -rf node_modules dist src/.next",
-    "font": "ts-node internals/font-parse.ts"
+    "font": "ts-node internals/font-parse.ts",
+    "font:copy": "cpy --parents resources/fonts-export src/public/font-meta"
   },
   "engines": {
     "node": ">=10"
@@ -54,6 +55,7 @@
     "@typescript-eslint/parser": "^2.7.0",
     "@zeit/next-css": "^1.0.1",
     "babel-plugin-styled-components": "^1.10.6",
+    "cpy-cli": "^2.0.0",
     "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
     "eslint": "^6.6.0",
