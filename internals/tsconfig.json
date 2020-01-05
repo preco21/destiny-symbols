@@ -1,4 +1,9 @@
 {
+  "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "@preco21/tsconfig",
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false
+  },
   "include": ["**/*.ts"]
 }
