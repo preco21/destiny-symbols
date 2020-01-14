@@ -19,4 +19,7 @@ module.exports = withPlugins([withCSS, withImages, withFonts], {
   devIndicators: {
     autoPrerender: false,
   },
+  env: {
+    API_ENDPOINT: getEnv('API_ENDPOINT'),
+  },
 })
