@@ -33,7 +33,7 @@ export async function loadMetadataList() {
 
 export async function loadMetadata(path: string) {
   const { data: fontMetadata } = await axios.get(
-    apibase(`font-meta/resources/font-export/${path}`),
+    apibase(`font-meta/resources/fonts-export/${path}`),
   )
-  return fontMetadata as FontMetadata
+  return fontMetadata as FontMetadata[]
 }
