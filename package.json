@@ -16,8 +16,9 @@
     "build:prepare": "next build src",
     "build:export": "next export --outdir dist src",
     "clean": "rm -rf node_modules dist src/.next",
-    "font": "ts-node internals/font-parse.ts",
-    "font:copy": "cpy --parents resources/fonts-export src/public/font-meta"
+    "font": "ts-node internals/font.ts",
+    "font:copy": "cpy --parents resources/fonts-export src/public",
+    "font:clean": "rm -rf resources/fonts-export"
   },
   "engines": {
     "node": ">=10"

@@ -36,7 +36,6 @@ export class Font {
 
   public constructor(options: FontOptions) {
     this.filename = options.filename
-
     this.name = options.font.names.fullName.en
     this.fontFamily = options.font.names.fontFamily.en
     this.totalGlyphs = options.font.numGlyphs
@@ -78,8 +77,8 @@ export class FontMetadataExtract {
     this.input = options.inputPath
     this.output = options.outputPath
     this.detailDirToken = options.detailDirToken
-    this.fileExtension = options.outputFileExtension || '.json'
-    this.filter = options.filter || []
+    this.fileExtension = options.outputFileExtension ?? '.json'
+    this.filter = options.filter ?? []
     this.createdAt = new Date()
   }
 
@@ -113,7 +112,7 @@ export class FontMetadataExtract {
     }
   }
 
-  public async extractToPath(filename = 'meta.json') {
+  public async extractMetadataToPath(filename = 'meta.json') {
     await ensureDir(this.output)
     await fs.writeFile(
       _path.join(this.output, filename),

@@ -1,5 +1,4 @@
 import { FontMetadataExtract } from './lib/font-parse'
-
 ;(async () => {
   const fe = new FontMetadataExtract({
     inputPath: 'resources/fonts',
@@ -7,5 +6,5 @@ import { FontMetadataExtract } from './lib/font-parse'
     detailDirToken: 'data',
   })
   await fe.loadFonts()
-  await fe.extractToPath()
+  await fe.extractMetadataToPath()
 })()
