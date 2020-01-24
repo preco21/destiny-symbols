@@ -1,6 +1,6 @@
 # Destiny 2 Symbols Catalog
 
-> Lists all Destiny 2 simbols that you can add to your nickname
+> A catalog for all Destiny 2 symbols
 
 ## Install
 

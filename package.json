@@ -1,7 +1,7 @@
 {
   "name": "destiny-symbols",
   "version": "0.0.0",
-  "description": "Destiny 2 symbols catalog",
+  "description": "A catalog for all Destiny 2 symbols",
   "author": "Plusb Preco <plusb21@gmail.com>",
   "private": true,
   "scripts": {

@@ -13,11 +13,11 @@ export function Layout({ children, title }: any) {
     <>
       <Head>
         <title>{title}</title>
-        <meta name="theme-color" content="#daedae" />
+        <meta name="theme-color" content="#3C493F" />
       </Head>
       <NextSeo
         title="Destiny 2 Symbols"
-        description="Lists all Destiny 2 simbols that you can add to your nickname"
+        description="A catalog for all Destiny 2 symbols"
       />
       {children}
     </>
