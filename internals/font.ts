@@ -1,4 +1,4 @@
-import { basename, extname } from 'path'
+import { join } from 'path'
 import { promises as fs } from 'fs'
 import { copy, ensureDir, ensureFile } from 'fs-extra'
 import { FontExtract, loadFonts } from './lib/font-parse'
@@ -23,9 +23,14 @@ const FONT_OUTPUT_PATH = 'resources/fonts-export/fonts'
       JSON.stringify(fontExtract.getMergedFont()),
     )
     await ensureDir(FONT_OUTPUT_PATH)
-    await copy(SOURCE_PATH, FONT_OUTPUT_PATH, {
-      filter: (src) => FONT_INCLUDES.includes(basename(src, extname(src))),
-    })
+    await Promise.all(
+      FONT_INCLUDES.map((fontFilename) =>
+        copy(
+          join(SOURCE_PATH, fontFilename),
+          join(FONT_OUTPUT_PATH, fontFilename),
+        ),
+      ),
+    )
   } catch (err) {
     console.error(err)
     process.exit(1)
