@@ -1,6 +1,5 @@
-import { join } from 'path'
 import { promises as fs } from 'fs'
-import { copy, ensureDir, ensureFile } from 'fs-extra'
+import { ensureFile } from 'fs-extra'
 import { FontExtract, loadFonts } from './lib/font-parse'
 
 const FONT_INCLUDES = ['Destiny_Keys.otf', 'Destiny_Symbols_PC.otf']
