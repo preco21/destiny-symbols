@@ -9,17 +9,6 @@ export function getGlyphs(font: opentype.Font) {
   )
 }
 
-export interface FontMetadata {
-  createdAt: string
-  dir: string
-  fonts: {
-    name: string
-    filename: string
-    metadataPath: string
-    totalGlyphs: number
-  }[]
-}
-
 export interface FontOptions {
   filename: string
   font: opentype.Font
