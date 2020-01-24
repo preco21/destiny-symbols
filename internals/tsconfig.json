@@ -2,6 +2,7 @@
   "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "@preco21/tsconfig",
   "compilerOptions": {
+    "target": "es2020",
     "sourceMap": true,
     "declaration": false
   },
