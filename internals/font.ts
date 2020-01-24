@@ -3,7 +3,7 @@ import { promises as fs } from 'fs'
 import { copy, ensureDir, ensureFile } from 'fs-extra'
 import { FontExtract, loadFonts } from './lib/font-parse'
 
-const FONT_INCLUDES = ['Destiny_Keys.otf', 'Destiny_Keys_PC.otf']
+const FONT_INCLUDES = ['Destiny_Keys.otf', 'Destiny_Symbols_PC.otf']
 
 const SOURCE_PATH = 'resources/fonts'
 const METADATA_OUTPUT_PATH = 'resources/fonts-export/meta.json'
