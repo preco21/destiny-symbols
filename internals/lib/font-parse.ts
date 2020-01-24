@@ -1,8 +1,6 @@
 import * as _path from 'path'
 import { promises as fs } from 'fs'
 import * as opentype from 'opentype.js'
-import { ensureDir } from 'fs-extra'
-
 export type IGlyph = Partial<opentype.Glyph> & { character: string }
 
 export function getGlyphs(font: opentype.Font) {
@@ -27,7 +25,21 @@ export interface FontOptions {
   font: opentype.Font
 }
 
-export class Font {
+export interface IFont {
+  name: string
+  filename: string
+  fontFamily: string
+  totalGlyphs: number
+  glyphs: IGlyph[]
+}
+
+export interface IFontCombined {
+  totalGlyphs: number
+  glyphs: IGlyph[]
+  createdAt: string
+}
+
+export class Font implements IFont {
   public readonly name: string
   public readonly filename: string
   public readonly fontFamily: string
@@ -39,7 +51,6 @@ export class Font {
     this.name = options.font.names.fullName.en
     this.fontFamily = options.font.names.fontFamily.en
     this.totalGlyphs = options.font.numGlyphs
-
     const glyphs = getGlyphs(options.font)
     this.glyphs = glyphs.map((glyph) => ({
       ...glyph,
@@ -56,79 +67,51 @@ export function loadFont(path: string) {
   })
 }
 
-export interface FontMetadataExtractOptions {
-  inputPath: string
-  outputPath: string
-  detailDirToken: string
-  outputFileExtension?: string
-  filter?: string[]
+export interface FontExtractOptions {
+  fonts: Font[]
+  createdAt?: Date
 }
 
-export class FontMetadataExtract {
-  public readonly input: string
-  public readonly output: string
-  public readonly detailDirToken: string
-  public readonly fileExtension: string
-  public readonly filter: string[]
-  public readonly createdAt: Date
-  public fonts: Font[] = []
+export class FontExtract {
+  public fonts: Font[]
+  public createdAt: Date
 
-  public constructor(options: FontMetadataExtractOptions) {
-    this.input = options.inputPath
-    this.output = options.outputPath
-    this.detailDirToken = options.detailDirToken
-    this.fileExtension = options.outputFileExtension ?? '.json'
-    this.filter = options.filter ?? []
-    this.createdAt = new Date()
+  public constructor(options: FontExtractOptions) {
+    this.fonts = options.fonts
+    this.createdAt = options.createdAt ?? new Date()
   }
 
-  public async loadFonts() {
-    const fontPaths = await fs.readdir(this.input)
-    const fonts = fontPaths.map((path) =>
-      loadFont(_path.join(this.input, path)),
+  public getMergedFont(): IFontCombined {
+    const flatGlyphsWithFont = this.fonts.flatMap((font) =>
+      font.glyphs.map<[IGlyph, IFont]>((glyph) => [glyph, font]),
     )
-    this.fonts = fonts
-  }
-
-  public getMetadataPath(font: Font) {
-    return _path.posix.join(
-      this.detailDirToken,
-      `${_path.basename(font.filename, _path.extname(font.filename))}${
-        this.fileExtension
-      }`,
-    )
-  }
-
-  public getMetadata(): FontMetadata {
-    return {
-      createdAt: this.createdAt.toISOString(),
-      dir: this.detailDirToken,
-      fonts: this.fonts.map((font) => ({
+    const glyphsByKey = flatGlyphsWithFont.reduce((cache, pair) => {
+      const [glyph] = pair
+      if (cache.has(glyph.character)) {
+        return cache
+      }
+      cache.set(glyph.character, pair)
+      return cache
+    }, new Map<string, [IGlyph, IFont]>())
+    const glyphFontPairs = Array.from(glyphsByKey.values())
+    const glyphs = glyphFontPairs.map(([glyph, font]) => ({
+      ...glyph,
+      meta: {
         name: font.name,
-        filename: _path.posix.normalize(font.filename),
-        metadataPath: this.getMetadataPath(font),
-        totalGlyphs: font.totalGlyphs,
-      })),
+        filename: font.filename,
+        fontFamily: font.fontFamily,
+      },
+    }))
+    return {
+      totalGlyphs: glyphFontPairs.length,
+      glyphs,
+      createdAt: this.createdAt.toISOString(),
     }
   }
+}
 
-  public async extractMetadataToPath(filename = 'meta.json') {
-    await ensureDir(this.output)
-    await fs.writeFile(
-      _path.join(this.output, filename),
-      JSON.stringify(this.getMetadata()),
-    )
-
-    const outputPath = _path.join(this.output, this.detailDirToken)
-    await ensureDir(outputPath)
-
-    await Promise.all(
-      this.fonts.map((font) =>
-        fs.writeFile(
-          _path.join(this.output, this.getMetadataPath(font)),
-          JSON.stringify(font.glyphs),
-        ),
-      ),
-    )
-  }
+export async function loadFonts(inputPath: string) {
+  const fontPaths = await fs.readdir(inputPath)
+  const fonts = fontPaths.map((path) => loadFont(_path.join(inputPath, path)))
+  return fonts
 }
