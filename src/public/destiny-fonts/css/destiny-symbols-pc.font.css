@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'Destiny_Symbols_PC';
+  src: url('/destiny-fonts/fonts/destiny_symbols_pc.woff2') format('woff2'),
+    url('/destiny-fonts/fonts/destiny_symbols_pc.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
