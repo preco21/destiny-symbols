@@ -5,9 +5,8 @@ node_modules
 .env
 
 /src/.next
-/src/public/font-meta
+/src/public/resources/fonts-export
 
 /dist
 
-/resources/fonts
 /resources/fonts-export
