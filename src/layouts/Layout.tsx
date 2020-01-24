@@ -8,6 +8,19 @@ import * as PropTypes from 'prop-types'
 
 FocusStyleManager.onlyShowFocusOnTabs()
 
+if (typeof window !== 'undefined') {
+  const WebFontLoader = require('webfontloader')
+  WebFontLoader.load({
+    custom: {
+      families: ['Destiny_Keys', 'Destiny_Symbols_PC'],
+      urls: [
+        '/destiny-fonts/css/destiny-keys.font.css',
+        '/destiny-fonts/css/destiny-symbols-pc.font.css',
+      ],
+    },
+  })
+}
+
 export function Layout({ children, title }: any) {
   return (
     <>
