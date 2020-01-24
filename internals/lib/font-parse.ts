@@ -22,7 +22,15 @@ export interface IFont {
   glyphs: IGlyph[]
 }
 
+export interface IFontMetadata {
+  name: string
+  filename: string
+  fontFamily: string
+  totalGlyphs: number
+}
+
 export interface IFontCombined {
+  meta: IFontMetadata[]
   totalGlyphs: number
   glyphs: IGlyph[]
   createdAt: string
@@ -92,6 +100,12 @@ export class FontExtract {
       },
     }))
     return {
+      meta: this.fonts.map((e) => ({
+        name: e.name,
+        filename: e.filename,
+        fontFamily: e.fontFamily,
+        totalGlyphs: e.totalGlyphs,
+      })),
       totalGlyphs: glyphFontPairs.length,
       glyphs,
       createdAt: this.createdAt.toISOString(),
