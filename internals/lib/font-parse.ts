@@ -2,6 +2,13 @@ import * as _path from 'path'
 import { promises as fs } from 'fs'
 import * as opentype from 'opentype.js'
 export type IGlyph = Partial<opentype.Glyph> & { character: string }
+export type IGlyphWithMetadata = IGlyph & {
+  meta: {
+    name: string
+    filename: string
+    fontFamily: string
+  }
+}
 
 export function getGlyphs(font: opentype.Font) {
   return Array.from({ length: font.glyphs.length }, (_, i) =>
@@ -32,7 +39,7 @@ export interface IFontMetadata {
 export interface IFontCombined {
   meta: IFontMetadata[]
   totalGlyphs: number
-  glyphs: IGlyph[]
+  glyphs: IGlyphWithMetadata[]
   createdAt: string
 }
 
