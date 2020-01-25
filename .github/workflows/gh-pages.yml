@@ -1,0 +1,41 @@
+name: github pages deployment
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: setup sode
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: install dependencies
+      run: npm ci
+
+    - name: generate font metadata information
+      run: npm run font
+
+    - name: build the project
+    - run: npm run build
+
+    - name: deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./dist
