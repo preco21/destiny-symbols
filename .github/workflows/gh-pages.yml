@@ -33,7 +33,7 @@ jobs:
       - name: Build the project
         run: npm run build
         env:
-          API_ENDPOINT: https://uat.prevl.io/destiny-symbols/
+          API_ENDPOINT: https://uat.prevl.io/
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v2
