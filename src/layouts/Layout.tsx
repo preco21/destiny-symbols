@@ -14,8 +14,8 @@ if (typeof window !== 'undefined') {
     custom: {
       families: ['Destiny_Keys', 'Destiny_Symbols_PC'],
       urls: [
-        '/destiny-symbols/destiny-fonts/css/destiny-keys.font.css',
-        '/destiny-symbols/destiny-fonts/css/destiny-symbols-pc.font.css',
+        '/destiny-fonts/css/destiny-keys.font.css',
+        '/destiny-fonts/css/destiny-symbols-pc.font.css',
       ],
     },
   })
