@@ -31,7 +31,7 @@ jobs:
       run: npm run font
 
     - name: build the project
-    - run: npm run build
+      run: npm run build
 
     - name: deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v2
