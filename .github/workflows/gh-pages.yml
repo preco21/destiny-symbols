@@ -32,6 +32,8 @@ jobs:
 
     - name: build the project
       run: npm run build
+      env:
+        API_ENDPOINT: /
 
     - name: deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v2
