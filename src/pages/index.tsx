@@ -73,13 +73,14 @@ export default function IndexPage() {
                     <Tag style={{ backgroundColor: Colors.DARK_GRAY1 }}>
                       <H2
                         css={`
-                    font-family: '${e.meta.distinctFontFamily}', sans-serif;
-                    text-align: center;
-                    margin: 0;
-                    font-weight: normal;
-                    max-width: 100%;
-                    justify-self: center;
-                    `}
+                          font-family: '${e.meta.distinctFontFamily}', sans-serif;
+                          text-align: center;
+                          line-height: 1.5;
+                          margin: 0;
+                          font-weight: normal;
+                          max-width: 100%;
+                          justify-self: center;
+                        `}
                       >
                         {e?.unicode && String.fromCharCode(e.unicode)}
                       </H2>
