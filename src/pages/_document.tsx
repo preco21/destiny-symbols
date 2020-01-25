@@ -60,7 +60,7 @@ export default class _Document extends Document {
             <meta
               key="csp"
               httpEquiv="Content-Security-Policy"
-              content={`default-src 'self'; script-src 'self' ${cspHash}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https: http:`}
+              content={`default-src 'self'; script-src 'self' ${cspHash}; style-src 'self' 'unsafe-inline' data:; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https: http:`}
             />
           )}
         </Head>
