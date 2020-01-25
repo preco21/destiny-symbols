@@ -32,7 +32,15 @@ export function Layout({ children, title }: any) {
         title="Destiny 2 Symbols"
         description="A catalog for all Destiny 2 symbols"
       />
-      {children}
+      <div
+        css={`
+          min-height: 100%;
+          height: 100%;
+        `}
+        className="bp3-dark"
+      >
+        {children}
+      </div>
     </>
   )
 }
