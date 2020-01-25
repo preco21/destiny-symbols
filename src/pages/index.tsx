@@ -53,6 +53,7 @@ export default function IndexPage() {
           >
             {data?.glyphs.map((e) => (
               <div
+                key={e.index}
                 css={`
                   list-style: none;
                 `}
