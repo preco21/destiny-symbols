@@ -73,10 +73,10 @@ export default function IndexPage() {
                   >
                     <Tag style={{ backgroundColor: Colors.DARK_GRAY1 }}>
                       <H2
+                        style={{ lineHeight: '1.5' }}
                         css={`
                           font-family: '${e.meta.distinctFontFamily}', sans-serif;
                           text-align: center;
-                          line-height: 1.5;
                           margin: 0;
                           font-weight: normal;
                           max-width: 100%;
@@ -100,7 +100,7 @@ export default function IndexPage() {
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
-                            margin-bottom: 0.2em;
+                            margin-bottom: 0.1em;
                           `}
                         >
                           {e.name}
