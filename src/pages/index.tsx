@@ -63,6 +63,9 @@ export default function IndexPage() {
                   css="height: 100%;"
                   elevation={Elevation.TWO}
                   interactive
+                  onClick={() =>
+                    clip.copy(e?.unicode && String.fromCharCode(e.unicode))
+                  }
                 >
                   <div
                     css={`
@@ -111,9 +114,6 @@ export default function IndexPage() {
                     <Button
                       style={{ backgroundColor: Colors.DARK_GRAY5 }}
                       icon={IconNames.CLIPBOARD}
-                      onClick={() =>
-                        clip.copy(e?.unicode && String.fromCharCode(e.unicode))
-                      }
                     >
                       Copy
                     </Button>
