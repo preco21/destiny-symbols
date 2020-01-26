@@ -62,6 +62,7 @@ export default function IndexPage() {
                   style={{ backgroundColor: Colors.DARK_GRAY3 }}
                   css="height: 100%;"
                   elevation={Elevation.TWO}
+                  interactive
                 >
                   <div
                     css={`
